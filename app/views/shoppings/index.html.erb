@@ -1,0 +1,18 @@
+CSVをインポート！
+
+<%= form_tag import_shoppings_path, multipart: true do %>
+  <%= file_field_tag :file, accept: '.csv'  %>
+  <%= submit_tag "インポート" %>
+<% end %>
+
+<% @shoppings.each do |shop| %>
+  <p>
+    <% birthday = Date.parse(shop.birth)  %>
+    <%= 
+    "名前は#{shop.name}
+    (#{(Date.today.strftime('%Y%m%d').to_i - birthday.strftime('%Y%m%d').to_i) / 10000}歳) 
+    #{shop.item}を
+    #{shop.price * shop.quantity}円お買い上げ。" 
+    %>
+  </p>
+<% end %>
